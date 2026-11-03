@@ -1,5 +1,5 @@
 // ======================================
-// TrackMate Ver2.3
+// TrackMate
 // ======================================
 
 // ---------- データ ----------
@@ -519,4 +519,4 @@ function startTrackMate() {
 
 startTrackMate();
 
-console.log("🏃 TrackMate Ver2.3 起動！");
+console.log("🏃 TrackMate 起動！");
