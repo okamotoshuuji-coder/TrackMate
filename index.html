@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>TrackMate Ver2.3</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <section id="loginPage" class="page active login-page">
+    <div class="login-card">
+      <div class="brand-icon">👟</div>
+      <h1>TrackMate</h1>
+      <p class="subtitle">昨日の自分を超えよう。</p>
+      <label for="username">ユーザー名</label>
+      <input id="username" type="text" autocomplete="username" placeholder="ユーザー名">
+      <label for="password">パスワード</label>
+      <input id="password" type="password" autocomplete="current-password" placeholder="パスワード">
+      <button id="loginBtn">ログイン / 初回登録</button>
+      <p class="version">Version 2.3</p>
+      <p class="hint">このアプリはこのブラウザ内にデータを保存します。</p>
+    </div>
+  </section>
+
+  <section id="homePage" class="page">
+    <header><h1>👟 TrackMate</h1><p>こんにちは、<strong id="userNameDisplay">Runner</strong>！</p></header>
+    <main>
+      <div class="card hero-card"><p class="eyebrow">YOUR RUNNING LOG</p><h2>昨日の自分を超えよう。</h2><p>練習も記録も、少しずつ積み重ねよう。</p></div>
+      <div class="grid-two">
+        <div class="card"><h2>⭐ レベル</h2><div class="xp-bar"><div class="xp" id="xpBar"></div></div><p>Lv. <strong id="level">1</strong> · <span id="xpText">0 / 100 XP</span></p></div>
+        <div class="card"><h2>🏅 1500m PB</h2><p class="big-stat" id="homePB">記録なし</p><button class="secondary-btn" data-go="graphPage">成長を見る</button></div>
+      </div>
+      <div class="card"><h2>🤖 AIコーチ</h2><p id="coachText">今日も自分のペースでいこう！</p><p class="small-note">体調や疲れに合わせて、無理せず練習しよう。</p></div>
+      <div class="grid-two">
+        <div class="card"><h2>🎯 今日の目標</h2><p id="todayGoal">フォームを意識して、気持ちよく走ろう。</p></div>
+        <div class="card"><h2>📊 今日の記録</h2><button id="goRecordBtn">記録を入力する</button></div>
+      </div>
+    </main>
+  </section>
+
+  <section id="recordPage" class="page">
+    <header><h1>⏱️ 練習記録</h1><p>走った記録を残そう。</p></header>
+    <main>
+      <div class="card">
+        <h2>記録を保存</h2>
+        <label for="event">種目</label>
+        <select id="event"><option>100m</option><option>200m</option><option>400m</option><option>800m</option><option selected>1500m</option><option>3000m</option></select>
+        <label for="time">タイム</label>
+        <input id="time" type="text" placeholder="例：5:12（秒数だけなら 13.8）">
+        <label for="memo">メモ</label>
+        <textarea id="memo" placeholder="練習内容・感想など"></textarea>
+        <button id="saveRecord">保存する</button>
+      </div>
+      <div class="card"><div class="section-heading"><h2>📜 記録一覧</h2><span id="recordCount" class="pill">0件</span></div><div id="records"></div></div>
+    </main>
+  </section>
+
+  <section id="graphPage" class="page">
+    <header><h1>📈 成長</h1><p>記録の変化を確認しよう。</p></header>
+    <main>
+      <div class="card"><h2>自己ベスト</h2><p id="bestTime" class="big-stat">1500m 記録なし</p></div>
+      <div class="card">
+        <div class="section-heading"><h2>成長グラフ</h2><select id="graphEvent" class="compact-select"><option>100m</option><option>200m</option><option>400m</option><option>800m</option><option selected>1500m</option><option>3000m</option></select></div>
+        <div class="chart-wrap"><canvas id="graphCanvas"></canvas></div>
+        <p id="graphMessage" class="small-note"></p>
+      </div>
+    </main>
+  </section>
+
+  <section id="pacePage" class="page">
+    <header><h1>🧮 ペース計算</h1><p>1500mの目標タイムから通過タイムを計算。</p></header>
+    <main>
+      <div class="card"><h2>1500m目標タイム</h2><label for="goalTime">目標タイム（分:秒）</label><input id="goalTime" type="text" placeholder="例：5:00"><button id="calcPace">計算する</button></div>
+      <div class="card"><h2>通過タイムの目安</h2><div class="pace-results"><p>400m：<strong id="pace400">-</strong></p><p>800m：<strong id="pace800">-</strong></p><p>1000m：<strong id="pace1000">-</strong></p><p>1200m：<strong id="pace1200">-</strong></p></div><p class="small-note">計算上の均等ペースです。実際のレースでは状況に合わせて調整しよう。</p></div>
+    </main>
+  </section>
+
+  <section id="profilePage" class="page">
+    <header><h1>👤 プロフィール</h1><p>TrackMateの利用情報。</p></header>
+    <main><div class="card"><h2 id="profileName">Runner</h2><p>所属・目標などは自分の状況に合わせて使ってね。</p><p id="profilePB">1500m PB：記録なし</p></div></main>
+  </section>
+
+  <section id="settingsPage" class="page">
+    <header><h1>⚙️ 設定</h1><p>アカウントとデータの管理。</p></header>
+    <main>
+      <div class="card"><h2>ログイン</h2><p class="small-note">ログアウトしても記録はこのブラウザに残ります。</p><button id="logoutBtn" class="secondary-btn">ログアウト</button></div>
+      <div class="card danger-card"><h2>データ管理</h2><p class="small-note">アカウントリセットを行うと、ログイン情報・記録・レベル・自己ベストが削除されます。</p><button id="resetBtn" class="danger-btn">アカウントをリセット</button></div>
+    </main>
+  </section>
+
+  <nav class="bottom-nav" aria-label="メインメニュー">
+    <button data-page="homePage" class="active">🏠<span>ホーム</span></button>
+    <button data-page="recordPage">⏱️<span>記録</span></button>
+    <button data-page="graphPage">📈<span>成長</span></button>
+    <button data-page="pacePage">🧮<span>ペース</span></button>
+    <button data-page="profilePage">👤<span>プロフィール</span></button>
+    <button data-page="settingsPage">⚙️<span>設定</span></button>
+  </nav>
+</body>
+</html>
