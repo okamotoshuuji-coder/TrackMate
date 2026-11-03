@@ -7,6 +7,7 @@ let xp = Number(localStorage.getItem("xp")) || 0;
 let level = Number(localStorage.getItem("level")) || 1;
 let records = JSON.parse(localStorage.getItem("records")) || [];
 let growthChart = null;
+let coachUpdateTimer;
 
 // ---------- 要素 ----------
 const pages = document.querySelectorAll(".page");
@@ -411,9 +412,18 @@ function updateCoach() {
         "レースでは前半を落ち着いて入り、後半まで力を残そう！"
     ];
 
-    const index = Math.floor(Math.random() * messages.length);
-    coachText.textContent = messages[index];
+    const now = new Date();
+    const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+    coachText.textContent = messages[dayNumber % messages.length];
+
+    clearTimeout(coachUpdateTimer);
+    const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    coachUpdateTimer = setTimeout(updateCoach, nextMidnight - now);
 }
+
+document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) updateCoach();
+});
 
 // ======================================
 // 目標日までのカウントダウン
