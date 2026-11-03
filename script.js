@@ -11,14 +11,8 @@ let growthChart = null;
 // ---------- 要素 ----------
 const pages = document.querySelectorAll(".page");
 
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
 const resetBtn = document.getElementById("resetBtn");
 
-const usernameInput = document.getElementById("username");
-const passwordInput = document.getElementById("password");
-
-const userNameDisplay = document.getElementById("userNameDisplay");
 const levelText = document.getElementById("level");
 const xpBar = document.getElementById("xpBar");
 
@@ -43,55 +37,6 @@ function showPage(pageId) {
         drawGraph();
         updateBestTime();
     }
-}
-
-// ======================================
-// ログイン
-// ======================================
-loginBtn.addEventListener("click", () => {
-    const name = usernameInput.value.trim();
-    const password = passwordInput.value;
-
-    if (!name || !password) {
-        alert("ユーザー名とパスワードを入力してください！");
-        return;
-    }
-
-    const savedName = localStorage.getItem("loginName");
-    const savedPassword = localStorage.getItem("loginPassword");
-
-    if (savedName === null) {
-        localStorage.setItem("loginName", name);
-        localStorage.setItem("loginPassword", password);
-        localStorage.setItem("username", name);
-
-        userNameDisplay.textContent = name;
-        alert("初回登録が完了しました！");
-        showPage("homePage");
-        return;
-    }
-
-    if (name === savedName && password === savedPassword) {
-        localStorage.setItem("username", name);
-        userNameDisplay.textContent = name;
-        showPage("homePage");
-    } else {
-        alert("ユーザー名またはパスワードが違います");
-    }
-});
-
-// ======================================
-// ログアウト
-// ======================================
-if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-        if (confirm("ログアウトしますか？")) {
-            localStorage.removeItem("username");
-            usernameInput.value = "";
-            passwordInput.value = "";
-            showPage("loginPage");
-        }
-    });
 }
 
 // ======================================
@@ -561,20 +506,15 @@ if (resetBtn) {
 // 起動時の処理
 // ======================================
 function startTrackMate() {
+    localStorage.removeItem("loginName");
+    localStorage.removeItem("loginPassword");
+    localStorage.removeItem("username");
+
     displayRecords();
     updateXP();
     updateBestTime();
     updateCoach();
     updateCountdown();
-
-    const savedName = localStorage.getItem("username");
-
-    if (savedName) {
-        userNameDisplay.textContent = savedName;
-        showPage("homePage");
-    } else {
-        showPage("loginPage");
-    }
 }
 
 startTrackMate();

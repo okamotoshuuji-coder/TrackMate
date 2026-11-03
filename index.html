@@ -10,23 +10,8 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <section id="loginPage" class="page active login-page">
-    <div class="login-card">
-      <div class="brand-icon">👟</div>
-      <h1>TrackMate</h1>
-      <p class="subtitle">昨日の自分を超えよう。</p>
-      <label for="username">ユーザー名</label>
-      <input id="username" type="text" autocomplete="username" placeholder="ユーザー名">
-      <label for="password">パスワード</label>
-      <input id="password" type="password" autocomplete="current-password" placeholder="パスワード">
-      <button id="loginBtn">ログイン / 初回登録</button>
-      <p class="version">Version 2.3</p>
-      <p class="hint">このアプリはこのブラウザ内にデータを保存します。</p>
-    </div>
-  </section>
-
-  <section id="homePage" class="page">
-    <header><h1>👟 TrackMate</h1><p>こんにちは、<strong id="userNameDisplay">Runner</strong>！</p></header>
+  <section id="homePage" class="page active">
+    <header><h1>👟 TrackMate</h1><p>昨日の自分を超えよう。</p></header>
     <main>
       <div class="card hero-card"><p class="eyebrow">YOUR RUNNING LOG</p><h2>昨日の自分を超えよう。</h2><p>練習も記録も、少しずつ積み重ねよう。</p></div>
       <div class="grid-two">
@@ -84,10 +69,9 @@
   </section>
 
   <section id="settingsPage" class="page">
-    <header><h1>⚙️ 設定</h1><p>アカウントとデータの管理。</p></header>
+    <header><h1>⚙️ 設定</h1><p>記録とデータの管理。</p></header>
     <main>
-      <div class="card"><h2>ログイン</h2><p class="small-note">ログアウトしても記録はこのブラウザに残ります。</p><button id="logoutBtn" class="secondary-btn">ログアウト</button></div>
-      <div class="card danger-card"><h2>データ管理</h2><p class="small-note">アカウントリセットを行うと、ログイン情報・記録・レベル・自己ベストが削除されます。</p><button id="resetBtn" class="danger-btn">アカウントをリセット</button></div>
+      <div class="card danger-card"><h2>データ管理</h2><p class="small-note">記録・レベル・自己ベストを削除します。</p><button id="resetBtn" class="danger-btn">データをリセット</button></div>
     </main>
   </section>
 
